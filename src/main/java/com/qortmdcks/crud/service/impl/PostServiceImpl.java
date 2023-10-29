@@ -5,7 +5,10 @@ import com.qortmdcks.crud.payload.PostDto;
 import com.qortmdcks.crud.repository.PostRepository;
 import com.qortmdcks.crud.service.PostService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -27,6 +30,18 @@ public class PostServiceImpl implements PostService {
 
         PostDto postResponse = mapToDTO(newPost);
         return postResponse;
+    }
+
+    @Override
+    public List<Post> getAllPosts(){
+        List<Post> posts = postRepository.findAll();
+        return posts;
+    }
+
+    @Override
+    public PostDto getPostById(long id){
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+        return mapToDTO(post);
     }
 
     private PostDto mapToDTO(Post post){

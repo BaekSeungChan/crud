@@ -24,8 +24,9 @@ public class Post {
     private String description;
 
     @Column()
-    private String content;
+    private String location;
 
     @Column()
-    private String location;
+    private Integer price;
+
 }
