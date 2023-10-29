@@ -44,6 +44,27 @@ public class PostServiceImpl implements PostService {
         return mapToDTO(post);
     }
 
+    @Override
+    public void deletePostById(long id){
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+        postRepository.delete(post);
+    }
+
+    @Override
+    public PostDto updatePost(PostDto postDto, long id){
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+
+
+        post.setTitle(postDto.getTitle());
+        post.setDescription(postDto.getDescription());
+        post.setLocation(postDto.getLocation());
+        post.setPrice(postDto.getPrice());
+
+
+        Post updatedPost = postRepository.save(post);
+        return mapToDTO(updatedPost);
+    }
+
     private PostDto mapToDTO(Post post){
         PostDto postDto = mapper.map(post, PostDto.class);
 

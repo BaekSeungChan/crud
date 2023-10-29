@@ -40,8 +40,17 @@ public class PostController {
     }
 
     // 데이터를 수정하는 api
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDto> updatePost(@PathVariable(name = "id") long id, @Valid @RequestBody PostDto postDto){
+        PostDto postResponse = postService.updatePost(postDto, id);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
 
 
     // 데이터를 삭제하는 api
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePostById(@PathVariable(name = "id") long id){
+        postService.deletePostById(id);
+        return new ResponseEntity<>("deleted post", HttpStatus.OK);
+    }
 }
