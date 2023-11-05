@@ -1,5 +1,6 @@
 package com.qortmdcks.crud.payload;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,14 +11,18 @@ public class PostDto {
 
     @NotEmpty
     @Size(min = 2, message = "Post title should have at least 2 characters")
+    @Schema(description = "post tile")
     private String title;
 
     @NotEmpty
     @Size(min = 10, message = "Post description should have at least 10 characters")
+    @Schema(description = "post description")
     private String description;
 
     @NotEmpty
     private String location;
 
     private int price;
+
+    private Long categoryId;
 }
