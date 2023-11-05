@@ -17,16 +17,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
+    @Column(nullable = false)
     private String title;
 
-    @Column()
+    @Column(nullable = false)
     private String description;
 
-    @Column()
+    @Column(nullable = true)
     private String location;
 
     @Column()
-    private Integer price;
+    private int price = 0;
 
 }
